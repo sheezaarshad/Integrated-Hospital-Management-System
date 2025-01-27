@@ -1,0 +1,13 @@
+{% for doctor in doctors %}
+    <div>
+        <h3>{{ doctor.name }}</h3>
+        <p>Specialty: {{ doctor.specialty }}</p>
+        <p>Phone: {{ doctor.phone }}</p>
+        <p>Email: {{ doctor.email }}</p>
+        <p>Hospital: {{ doctor.hospital.name }}</p>
+        <p>Available Days: {{ doctor.available_days }}</p>
+        <p>Available From: {{ doctor.available_from|time:"P" }}</p>
+        <p>Available To: {{ doctor.available_to|time:"P" }}</p>
+        <img src="{{ doctor.profile_image.url }}" alt="{{ doctor.name }}" width="100">
+    </div>
+{% endfor %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-0">
+    <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+            <h3 class="block-title">Order Medicine from {{ pharmacy.pharmacy_name }}</h3>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'base' %}">
+                        <span class="ti-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">Pharmacy</li>
+                <li class="breadcrumb-item active">Order Medicine</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-area-2 proclinic-box-shadow">
+                {% if user.is_authenticated %}
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        {{ form.customer_name.label_tag }}
+                        {{ form.customer_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.phone.label_tag }}
+                        {{ form.phone }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.medicine_name.label_tag }}
+                        {{ form.medicine_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.quantity.label_tag }}
+                        {{ form.quantity }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.dosage.label_tag }}
+                        {{ form.dosage }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.form.label_tag }}
+                        {{ form.form }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.prescription.label_tag }}
+                        {{ form.prescription }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.address.label_tag }}
+                        {{ form.address }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+                {% else %}
+                <p>Please <a href="{% url 'login' %}">login</a> to order medicine.</p>
+                {% endif %}
+
+                {% if user.is_staff %}
+                <div class="alert alert-info mt-4">
+                    <strong>Note for Admins:</strong> After an order is placed, please assign a rider to this order for delivery.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

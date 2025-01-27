@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header bg-danger text-white">
+                    <h4>Cancel Appointment</h4>
+                </div>
+                <div class="card-body">
+                    <p>Are you sure you want to cancel this appointment?</p>
+                    <p><strong>Date:</strong> {{ appointment.date }}</p>
+                    <p><strong>Time:</strong> {{ appointment.time|time:"H:i" }}</p>
+                    <p><strong>Patient:</strong> {{ appointment.patient_name }}</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cancel Appointment</button>
+                        <a href="{% url 'doctor_profile' %}" class="btn btn-secondary">Go Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

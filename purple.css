@@ -1,0 +1,72 @@
+.proclinic-bg {
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.proclinic-text-color{
+    color: #af107a;  /* Updated text color */
+}
+.pagination .page-link {
+    color: #af107a;  /* Updated text color */
+}
+.pagination .page-item.active .page-link {
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-color: #ffffff;
+}
+.btn-primary {
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-color: #ffffff;
+}
+.btn-primary:hover {
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    opacity: 0.75;
+}
+.text-round {
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.btn-outline-primary {
+    color: #af107a;  /* Updated text color */
+    border-color: #ffffff;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.btn-hero-primary{
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-color: #fff;
+}
+.media h5{
+    color: #af107a;  /* Updated text color */
+}
+#faq2 .block-header{
+    background: #af107a;  /* Updated background color */
+    background: -webkit-linear-gradient(to right, #e22bca, #af107a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e22bca, #af107a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#faq1 .block-header {
+    color: #af107a;  /* Updated text color */
+}
+.widget-title{
+    color: #af107a;  /* Updated text color */
+}
+.pricing-h2{
+    color: #af107a;  /* Updated text color */
+}
+.pagination .page-link [class^="ti-"], [class*=" ti-"] {
+    color: #af107a;  /* Updated text color */
+}
+.block-title-new [class^="ti-"], .block-title-new [class*=" ti-"]{
+    color: #af107a;  /* Updated text color */
+}

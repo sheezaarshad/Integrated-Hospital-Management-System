@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Pending Sample Collection Requests</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Requested Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in sample_requests %}
+            <tr>
+                <td>{{ request.patient_name }}</td>
+                <td>{{ request.address }}</td>
+                <td>{{ request.phone }}</td>
+                <td>{{ request.email }}</td>
+                <td>{{ request.requested_date }}</td>
+                <td>
+                    <a href="{% url 'assign_rider' request.id %}" class="btn btn-primary">Assign Rider</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

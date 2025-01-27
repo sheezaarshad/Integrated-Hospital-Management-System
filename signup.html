@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center mb-4">Sign Up</h2>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <!-- Role selection form -->
+                    <form id="role-selection-form" method="post" action="{% url 'signup_role' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="role">Select Your Role</label>
+                            <select id="role" name="role" class="form-control" required>
+                                <option value="">--Select Role--</option>
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="hospital_owner">Hospital Owner</option>
+                                <option value="rider">Rider</option>
+                                <!-- Add more roles if needed -->
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="showSignupForm()">Continue</button>
+                    </form>
+
+                    <!-- Container for dynamic forms -->
+                    <div id="dynamic-signup-form" style="display: none;">
+                        <!-- Patient signup form -->
+                        <div id="patient-form" style="display: none;">
+                            <form method="post" action="{% url 'patient_signup' %}">
+                                {% csrf_token %}
+                                {{ patient_form.as_p }}
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </form>
+                        </div>
+
+                        <!-- Doctor signup form -->
+                        <div id="doctor-form" style="display: none;">
+                            <form method="post" action="{% url 'doctor_signup' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ doctor_form.as_p }}
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </form>
+                        </div>
+
+                        <!-- Hospital Owner signup form -->
+                        <div id="hospital-owner-form" style="display: none;">
+                            <form method="post" action="{% url 'hospital_owner_signup' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ hospital_owner_form.as_p }}
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </form>
+                        </div>
+
+                        <!-- Rider signup form -->
+                        <div id="rider-form" style="display: none;">
+                            <form method="post" action="{% url 'rider_signup' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ rider_form.as_p }}
+                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                            </form>
+                        </div>
+
+                            <!-- Lab Rider signup form
+                            <div id="lab-rider-form" style="display: none;">
+                                <form method="post" action="{% url 'rider_signup' %}">
+                                    {% csrf_token %}
+                                    {{ lab_rider_form.as_p }}
+                                    <button type="submit" class="btn btn-primary">Sign Up as Lab Rider</button>
+                                </form>
+                            </div> -->
+
+                            <!-- Pharmacy Rider signup form
+                            <div id="pharmacy-rider-form" style="display: none;">
+                                <form method="post" action="{% url 'rider_signup' %}">
+                                    {% csrf_token %}
+                                    {{ pharmacy_rider_form.as_p }}
+                                    <button type="submit" class="btn btn-primary">Sign Up as Pharmacy Rider</button>
+                                </form>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSignupForm() {
+        var role = document.getElementById('role').value;
+        document.getElementById('dynamic-signup-form').style.display = 'block';
+
+        // Hide all forms initially
+        document.getElementById('patient-form').style.display = 'none';
+        document.getElementById('doctor-form').style.display = 'none';
+        document.getElementById('hospital-owner-form').style.display = 'none';
+        document.getElementById('rider-form').style.display = 'none';
+
+        if (role === 'patient') {
+            document.getElementById('patient-form').style.display = 'block';
+        } else if (role === 'doctor') {
+            document.getElementById('doctor-form').style.display = 'block';
+        } else if (role === 'hospital_owner') {
+            document.getElementById('hospital-owner-form').style.display = 'block';
+        } else if (role === 'rider') {
+            document.getElementById('rider-form').style.display = 'block';
+        }
+    }
+
+
+</script>
+{% endblock %}

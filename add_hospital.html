@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-0">
+    <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+            <h3 class="block-title">Add Hospital</h3>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'base' %}">
+                        <span class="ti-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">Hospital</li>
+                <li class="breadcrumb-item active">Add Hospital</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card proclinic-box-shadow">
+                <div class="card-header">
+                    <h3 class="widget-title">Add Hospital</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'add_hospital' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="hospital-name">Hospital Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter hospital name" id="hospital-name" name="hospital_name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Phone">Phone <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter phone number" id="Phone" name="Phone" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Email">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" placeholder="Enter email address" id="Email" name="email" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="about-hospital">About Hospital</label>
+                                <textarea class="form-control" placeholder="Describe the hospital" id="about-hospital" rows="3" name="about_hospital"></textarea>
+                            </div>
+
+                            <!-- Services Offered -->
+                            <div class="form-group col-md-6">
+                                <label>Services Offered <span class="text-danger">*</span></label>
+                                <div class="border p-3">
+                                    {% for service in services %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="services_offered" value="{{ service }}" id="services{{ forloop.counter }}">
+                                        <label class="form-check-label" for="services{{ forloop.counter }}">{{ service }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Domain Available -->
+                            <div class="form-group col-md-6">
+                                <label>Domains Available <span class="text-danger">*</span></label>
+                                <div class="border p-3">
+                                    {% for domain in domains %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="domain_available" value="{{ domain }}" id="domain{{ forloop.counter }}">
+                                        <label class="form-check-label" for="domain{{ forloop.counter }}">{{ domain }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label for="address">Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" placeholder="Enter address" id="address" rows="3" name="address" required></textarea>
+                            </div>
+
+                             <div class="form-group col-md-12">
+                                <label for="image">Hospital Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+
+                            <div class="form-group col-md-12 mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="ex-check-2" required>
+                                    <label class="custom-control-label" for="ex-check-2">Please Confirm</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 text-right">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

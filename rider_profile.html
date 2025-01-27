@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="card-title">Rider Profile</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Welcome {{ rider.user.username }}</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Name:</strong> {{ rider.name }}</li>
+                        <li class="list-group-item"><strong>Phone:</strong> {{ rider.phone }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ rider.email }}</li>
+                        <li class="list-group-item"><strong>Rider Type:</strong> {{ rider.get_rider_type_display }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Lab Sample Collection Requests (if Lab Rider) -->
+            {% if rider.rider_type == 'Lab' %}
+                <div class="card mt-4">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="card-title">Sample Collection Requests</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {% for request in sample_collection_requests %}
+                                <li class="list-group-item">
+                                    <strong>Patient Name:</strong> {{ request.patient_name }}<br>
+                                    <strong>Phone:</strong> {{ request.phone }}<br>
+                                    <strong>Email:</strong> {{ request.email }}<br>
+                                    <strong>Address:</strong> {{ request.address }}<br>
+                                    <strong>Requested Date:</strong> {{ request.requested_date }}<br>
+                                    <strong>Sample Type:</strong> {{ request.sample_type }}<br>
+                                    <strong>Test Name:</strong> {{ request.test_name }}<br>
+                                    <strong>Time:</strong> {{ request.time }}<br>
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item">No sample collection requests found.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Pharmacy Orders (if Pharmacy Rider) -->
+            {% if rider.rider_type == 'Pharmacy' %}
+                <div class="card mt-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="card-title">Assigned Pharmacy Orders</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {% for order in orders %}
+                                <li class="list-group-item">
+                                    <strong>Customer Name:</strong> {{ order.customer_name }}<br>
+                                    <strong>Phone:</strong> {{ order.phone }}<br>
+                                    <strong>Email:</strong> {{ order.email }}<br>
+                                    <strong>Address:</strong> {{ order.address }}<br>
+                                    <strong>Medicine Name:</strong> {{ order.medicine_name }}<br>
+                                    <strong>Quantity:</strong> {{ order.quantity }}<br>
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item">No orders found.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

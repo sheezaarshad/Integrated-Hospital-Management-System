@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="card-title">Doctor Profile</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Welcome {{ doctor.name }}</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Specialty:</strong> {{ doctor.specialty }}</li>
+                        <li class="list-group-item"><strong>Phone:</strong> {{ doctor.phone }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ doctor.email }}</li>
+                        <li class="list-group-item"><strong>Hospital:</strong> {{ doctor.hospital.hospital_name }}</li>
+                        <li class="list-group-item"><strong>Available Days:</strong> {{ doctor.available_days }}</li>
+                        <li class="list-group-item"><strong>Available From:</strong> {{ doctor.available_from|time:"H:i" }}</li>
+                        <li class="list-group-item"><strong>Available To:</strong> {{ doctor.available_to|time:"H:i" }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Appointments Card -->
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="card-title">Appointments</h4>
+                </div>
+                <div class="card-body">
+    <ul class="list-group list-group-flush">
+        {% for appointment in appointments %}
+            <li class="list-group-item">
+                <a href="{% url 'cancel_appointment_doctor' appointment.id %}">
+                    {{ appointment.date }} - {{ appointment.time|time:"H:i" }} - Patient: {{ appointment.patient_name }}
+                </a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No appointments found.</li>
+        {% endfor %}
+    </ul>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

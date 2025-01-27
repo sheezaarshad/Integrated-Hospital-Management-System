@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row breadcrumb-bar mb-4">
+        <div class="col-md-6">
+            <h3 class="block-title">Request Sample Collection</h3>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'base' %}">
+                        <span class="ti-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">Request Sample Collection</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-10">
+            <div class="card shadow-sm border-light">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Request Sample Collection from {{ laboratory.lab_name }}</h2>
+
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'request_sample_collection' laboratory.id %}">
+                        {% csrf_token %}
+                        <div class="form-group mb-4">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Request Collection</button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-info text-center mt-4">
+                        Please <a href="{% url 'login' %}" class="btn btn-link">login</a> to request sample collection.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

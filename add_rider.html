@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Add Rider</h2>
+                    <form method="post" action="{% url 'submit_rider_form' %}">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            <label for="rider_name" class="form-label">Name</label>
+                            <input type="text" id="rider_name" name="rider_name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="rider_email" class="form-label">Email</label>
+                            <input type="email" id="rider_email" name="rider_email" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="rider_phone" class="form-label">Phone</label>
+                            <input type="text" id="rider_phone" name="rider_phone" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="rider_type" class="form-label">Select Rider Type</label>
+                            <select id="rider_type" name="rider_type" class="form-select" required>
+                                <option value="Lab">Lab Rider</option>
+                                <option value="Pharmacy">Pharmacy Rider</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Rider Form</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

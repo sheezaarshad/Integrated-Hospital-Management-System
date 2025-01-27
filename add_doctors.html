@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Add Doctor</h2>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Doctor Name: </label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_specialty">Specialty:</label>
+                    {{ form.specialty }}
+                </div>
+                <div class="form-group">
+                    <label for="id_phone">Phone:</label>
+                    {{ form.phone }}
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="id_hospital">Hospital:</label>
+                    {{ form.hospital }}
+                </div>
+                <div class="form-group">
+                    <label for="id_profile_image">Profile Image:</label>
+                    {{ form.profile_image }}
+                </div>
+
+                <!-- New fields for availability -->
+                <div class="form-group">
+                    <label for="id_available_days">Available Days:</label>
+                    {{ form.available_days }}
+                </div>
+                <div class="form-group">
+    <label for="id_available_from">Available From:</label>
+    {{ form.available_from }}
+    <small class="form-text text-muted">e.g., 08:00 AM</small>
+</div>
+<div class="form-group">
+    <label for="id_available_to">Available To:</label>
+    {{ form.available_to }}
+    <small class="form-text text-muted">e.g., 05:00 PM</small>
+</div>
+                <button type="submit" class="btn btn-primary">Add Doctor</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

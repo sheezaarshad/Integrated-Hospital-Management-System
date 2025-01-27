@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Integrated hospital management system-Bootstrap4 Hospital Admin</title>
+    <!-- Fav  Icon Link -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/fav.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- themify icons CSS -->
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- Animations CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/purple.css'%}" id="style_theme">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- morris charts -->
+    <link rel="stylesheet" href="{% static 'charts/css/morris.css' %}">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="{% static 'css/jquery-jvectormap.css' %}">
+
+    <script src="{% static 'js/modernizr.min.js' %}"></script>
+    <style>
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Updated background color */
+      color: #555; /* Updated text color */
+      background-image: url("{% static 'images/back.png' %}");
+      background-size: cover;
+      background-position: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #05729a; /* Updated header background color */
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 0px;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .hero-section {
+      background-image: url("{% static 'images/back.png' %}");
+      background-size: cover;
+      background-position: center;
+      padding: 200px 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-section h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #090707; /* Updated text color */
+    }
+
+    .hero-section p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      color: #090808; /* Updated text color */
+    }
+
+    .cta-buttons {
+      margin-top: 20px;
+    }
+
+    .cta-buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background-color: #090707; /* Updated button background color */
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .cta-buttons a:hover {
+      background-color: #af107a; /* Updated button hover background color */
+    }
+
+    .features-section {
+      background-color: #fff;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .feature {
+      margin-bottom: 40px;
+    }
+
+    .feature h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #af107a; /* Updated feature title color */
+    }
+
+    .feature p {
+      font-size: 16px;
+    }
+
+    footer {
+      background-color: #090909;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    /* Custom Login Button */
+    .custom-login-btn {
+      background-color: #e7e2e8;
+      border-color: #070505;
+      margin-right: 10px;
+    }
+
+    .custom-logout-btn {
+      background-color: #e7e2e8;
+      border-color: #070505;
+      margin-right: 10px;
+    }
+
+    .custom-signup-btn {
+      background-color: #ece5e5;
+      border-color: #070809;
+      margin-right: 10px;
+    }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="sidebar-header">
+        <a href="index.html"><img src="{% static 'images/final.png' %}" class="logo" alt="logo"></a>
+    </div>
+    <h1>Integrated Hospital Management System</h1>
+    <nav>
+    {% if user.is_authenticated %}
+        <div class="navbar-text">
+            {% if is_doctor %}
+                <a href="{% url 'doctor_profile' %}" class="text-white">{{ user.username }}</a>
+            {% elif is_hospital_owner %}
+                <a href="{% url 'hospital_owner_profile' %}" class="text-white">{{ user.username }}</a>
+            {% elif is_rider %}
+                <a href="{% url 'rider_profile' %}" class="text-white">{{ user.username }}</a>  <!-- Rider link -->
+            {% else %}
+                <a href="{% url 'view_profile' %}" class="text-white">{{ user.username }}</a>
+            {% endif %}
+        </div>
+    {% endif %}
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+    </ul>
+</nav>
+
+</header>
+
+<!-- Combined Menu -->
+<nav class="navbar navbar-expand-lg proclinic-bg text-white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"><span class="ti-home"></span> Hospital</a>
+                <div class="dropdown-menu">
+                    <!-- Add links related to hospitals -->
+                    {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <a class="dropdown-item" href="{% url 'hospital_owner_signup' %}">Hospital Registration</a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'hospital_owner_signup' %}">Hospital Registration</a>
+            {% endif %}
+        {% else %}
+            <!-- Handle case where user is not authenticated -->
+            <a class="dropdown-item" href="{% url 'login' %}">Hospital Registration</a>
+            <!-- Add link for registration if needed -->
+        {% endif %}
+                    <a class="dropdown-item" href="{% url 'hospital_available'%}">Hospital available  </a>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"><span class="ti-wheelchair"></span> Patients</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'patient_signup' %}">Patient registration</a>
+                </div>
+            </li>
+           <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+       aria-expanded="false"><span class="ti-wheelchair"></span> Doctors</a>
+    <div class="dropdown-menu">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <a class="dropdown-item" href="{% url 'doctor_signup' %}">Add Doctor</a>
+            {% else %}
+                <a class="dropdown-item" href="{% url 'doctor_signup' %}">Doctor registration</a>
+            {% endif %}
+        {% else %}
+            <!-- Handle case where user is not authenticated -->
+            <a class="dropdown-item" href="{% url 'login' %}">Doctor registration</a>
+            <!-- Add link for registration if needed -->
+        {% endif %}
+    </div>
+</li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"><span class="ti-user"></span> Pharmacy</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'pharmacy_available' %}">Pharmacies available</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"><span class="ti-home"></span> Laboratory</a>
+                <div class="dropdown-menu">
+                    <!-- Add links related to hospitals -->
+                    <a class="dropdown-item" href="{% url 'labs_available' %}">Labs Available</a>
+                </div>
+            </li>
+            
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false"><span class="ti-home"></span> Rider</a>
+                <div class="dropdown-menu">
+                    <!-- Add links related to hospitals -->
+                    <a class="dropdown-item" href="{% url 'rider_signup' %}">Rider Registration</a>
+                </div>
+            </li>
+        </ul>
+        <!-- Button -->
+        {% if not user.is_authenticated %}
+    <a href="{% url 'login' %}" class="btn btn-primary custom-login-btn">Login</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary custom-signup-btn">Register</a>
+    {% else %}
+    <a href="{% url 'logout' %}" class="btn btn-primary custom-logout-btn">Logout</a>
+    {% endif %}
+    </div>
+    </li>
+</nav>
+
+<!-- /Combined Menu -->
+
+{% block content %}
+<section class="hero-section">
+    <h1>Welcome to IHMS</h1>
+    <p>Streamline your hospital operations with our comprehensive management system.</p>
+    <div class="cta-buttons">
+        <a href="{% url 'hospital_available'%}">Select Hospital <i class="fas fa-hospital"></i></a>
+        <a href="{% url 'hospital_available'%}">Book Appointment <i class="far fa-calendar-alt"></i></a>
+        <a href="{% url 'pharmacy_available'%}">Order Medicine <i class="fas fa-pills"></i></a>
+        <a href="{% url 'labs_available'%}">Check Lab Result <i class="fas fa-flask"></i></a>
+    </div>
+</section>
+
+<section id="about" class="features-section">
+    <div class="feature">
+        <h2>Easy Patient Management <i class="fas fa-user-md"></i></h2>
+        <p>Efficiently manage patient records, appointments, and billing.</p>
+    </div>
+    <div class="feature">
+        <h2>Inventory Control <i class="fas fa-boxes"></i></h2>
+        <p>Keep track of medical supplies and equipment with ease.</p>
+    </div>
+    <div class="feature">
+        <h2>Staff Management <i class="fas fa-users"></i></h2>
+        <p>Manage schedules, payroll, and performance evaluations for your staff.</p>
+    </div>
+</section>
+{% endblock %}
+
+<footer>
+    <p>&copy; 2024 Integrated Hospital Management System</p>
+</footer>
+
+<!-- /Copy Rights-->
+</div>
+<!-- /Page Content -->
+</div>
+<!-- Back to Top -->
+<a id="back-to-top" href="#" class="back-to-top">
+    <span class="ti-angle-up"></span>
+</a>
+<!-- /Back to Top -->
+
+<!-- Jquery Library-->
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<!-- Popper Library-->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap Library-->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- morris charts -->
+<script src="{% static 'charts/js/raphael-min.js' %}"></script>
+<script src="{% static 'charts/js/morris.min.js' %}"></script>
+<script src="{% static 'js/custom-morris.js' %}"></script>
+<!-- Custom Script-->
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <style>
+        .hospital-image {
+            max-width: 500px; /* Adjust the width as needed */
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-primary mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title">Hospital Profile</h2>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <h3>Welcome to {{ hospital.hospital_name }}</h3>
+                        {% if hospital.image %}
+                            <img src="{{ hospital.image.url }}" alt="Hospital Image" class="img-fluid hospital-image">
+                        {% endif %}
+                    </div>
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item"><strong>Phone:</strong> {{ hospital.phone }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ hospital.email }}</li>
+                        <li class="list-group-item"><strong>About:</strong> {{ hospital.about_hospital }}</li>
+                        <li class="list-group-item"><strong>Services Offered:</strong> {{ hospital.services_offered }}</li>
+                        <li class="list-group-item"><strong>Domains Available:</strong> {{ hospital.domain_available }}</li>
+                        <li class="list-group-item"><strong>Address:</strong> {{ hospital.address }}</li>
+                    </ul>
+
+                    <!-- Doctors Section -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h4 class="card-title">Doctors</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for doctor in doctors %}
+                                    <li class="list-group-item">
+                                        <strong>Name:</strong> {{ doctor.name }}<br>
+                                        <strong>Specialty:</strong> {{ doctor.specialty }}<br>
+                                        <strong>Phone:</strong> {{ doctor.phone }}<br>
+                                        <strong>Email:</strong> {{ doctor.email }}
+                                    </li>
+                                {% empty %}
+                                    <li class="list-group-item">No doctors found.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Labs Section -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="card-title">Labs</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for lab in labs %}
+                                    <li class="list-group-item">
+                                        <strong>Name:</strong> {{ lab.lab_name }}<br>
+                                        <strong>Phone:</strong> {{ lab.phone }}<br>
+                                        <strong>Email:</strong> {{ lab.email }}<br>
+                                        <strong>Address:</strong> {{ lab.address }}
+                                    </li>
+                                {% empty %}
+                                    <li class="list-group-item">No labs found.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pharmacies Section -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-white">
+                            <h4 class="card-title">Pharmacies</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for pharmacy in pharmacies %}
+                                    <li class="list-group-item">
+                                        <strong>Name:</strong> {{ pharmacy.pharmacy_name }}<br>
+                                        <strong>Phone:</strong> {{ pharmacy.phone }}<br>
+                                        <strong>Email:</strong> {{ pharmacy.email }}<br>
+                                        <strong>Address:</strong> {{ pharmacy.address }}
+                                    </li>
+                                {% empty %}
+                                    <li class="list-group-item">No pharmacies found.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

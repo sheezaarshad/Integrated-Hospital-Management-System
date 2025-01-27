@@ -1,0 +1,98 @@
+<!-- patient_profile_view.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h2 class="card-title">Patient Profile</h2>
+                </div>
+                <div class="card-body">
+                    <h3>Welcome {{ profile.patient.user.username }}</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Name:</strong> {{ profile.patient_name }}</li>
+                        <li class="list-group-item"><strong>Date of Birth:</strong> {{ profile.dob }}</li>
+                        <li class="list-group-item"><strong>Age:</strong> {{ profile.age }}</li>
+                        <li class="list-group-item"><strong>Phone:</strong> {{ profile.phone }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ profile.email }}</li>
+                        <li class="list-group-item"><strong>Gender:</strong> {{ profile.gender }}</li>
+                        <li class="list-group-item"><strong>Address:</strong> {{ profile.address }}</li>
+                    </ul>
+                </div>
+            </div>
+
+<!-- Appointments Card -->
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h4 class="card-title">Appointments</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for appointment in appointments %}
+                <li class="list-group-item">
+                <a href="{% url 'appointment_detail' appointment.id %}">{{ appointment.date }} - {{ appointment.doctor }}</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No appointments found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+            <!-- Medicine Orders Card -->
+            <div class="card mt-4">
+                <div class="card-header bg-success text-white">
+                    <h4 class="card-title">Medicine Orders</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for order in orders %}
+                            <li class="list-group-item">{{ order.medicine_name }} - {{ order.pharmacy }} - {{ order.quantity }}</li>
+                        {% empty %}
+                            <li class="list-group-item">No medicine orders found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+<!-- Lab Reports Card -->
+
+            <div class="card mt-4">
+    <div class="card-header bg-info text-white">
+        <h4 class="card-title">Lab Reports</h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for report in test_reports %}
+                <li class="list-group-item">
+                    {{ report.report_date }} - {{ report.test_name }}
+                    <a href="{{ report.report_file.url }}" target="_blank" class="btn btn-info btn-sm ml-2">View Report</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No lab reports found.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+            <!-- Sample Collection Requests Card -->
+            <div class="card mt-4">
+                <div class="card-header bg-warning text-white">
+                    <h4 class="card-title">Sample Collection Requests</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for request in sample_collection_requests %}
+                            <li class="list-group-item">{{ request.requested_date }} - {{ request.laboratory.lab_name }} - {{ request.status }}</li>
+                        {% empty %}
+                            <li class="list-group-item">No sample collection requests found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

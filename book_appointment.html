@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-0">
+    <div class="row breadcrumb-bar">
+        <div class="col-md-6">
+            <h3 class="block-title">Book Appointment with {{ doctor.name }}</h3>
+        </div>
+        <div class="col-md-6">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'base' %}">
+                        <span class="ti-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">Appointment</li>
+                <li class="breadcrumb-item active">Book Appointment</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget-area-2 proclinic-box-shadow">
+                <!-- Display Doctor's Availability -->
+                <div class="doctor-availability">
+                    <h5>Doctor Availability</h5>
+                    <p><strong>Available Days:</strong> {{ doctor.available_days }}</p>
+                    <p><strong>Available Time:</strong> {{ doctor.available_from|time:"h:i A" }} - {{ doctor.available_to|time:"h:i A" }}</p>
+                </div>
+
+                {% if user.is_authenticated %}
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.patient_name.label_tag }}
+                        {{ form.patient_name }}
+                        {% if form.patient_name.errors %}
+                            <div class="text-danger">{{ form.patient_name.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.date.label_tag }}
+                        {{ form.date }}
+                        {% if form.date.errors %}
+                            <div class="text-danger">{{ form.date.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+    {{ form.time.label_tag }}
+    {{ form.time }}
+    {% if form.time.errors %}
+        <div class="text-danger">{{ form.time.errors }}</div>
+    {% endif %}
+</div>
+                    <div class="form-group">
+                        {{ form.reason.label_tag }}
+                        {{ form.reason }}
+                        {% if form.reason.errors %}
+                            <div class="text-danger">{{ form.reason.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                </form>
+                {% else %}
+                <p>Please <a href="{% url 'login' %}">login</a> to book an appointment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

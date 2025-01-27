@@ -1,0 +1,19 @@
+<!-- laboratory/assign_rider.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Assign Rider for {{ sample_request.patient_name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="rider">Select Rider</label>
+            <select class="form-control" id="rider" name="rider">
+                {% for lab_rider in lab_riders %}
+                <option value="{{ lab_rider.rider.id }}">{{ lab_rider.rider.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Assign Rider</button>
+    </form>
+</div>
+{% endblock %}

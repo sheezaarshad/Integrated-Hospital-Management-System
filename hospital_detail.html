@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Additional styles specific to hospital detail page */
+    .hospital-detail {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .hospital-detail img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .hospital-info {
+        margin-bottom: 15px;
+    }
+    .hospital-info strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #fff;
+    }
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .btn-primary, .btn-secondary {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="hospital-detail">
+                <h2>{{ hospital.hospital_name }}</h2>
+                {% if hospital.image %}
+                    <img src="{{ hospital.image.url }}" alt="{{ hospital.hospital_name }}">
+                {% endif %}
+                <div class="hospital-info">
+                    <strong>Phone:</strong> {{ hospital.phone }}
+                    <strong>Email:</strong> {{ hospital.email }}
+                    <strong>About Hospital:</strong> {{ hospital.about_hospital }}
+                    <strong>Services Offered:</strong> {{ hospital.services_offered }}
+                    <strong>Domain Available:</strong> {{ hospital.domain_available }}
+                    <strong>Address:</strong> {{ hospital.address }}
+                </div>
+
+                <hr>
+
+                <strong>Doctors:</strong>
+                <div class="row">
+                    {% for doctor in hospital.doctors.all %}
+                    <div class="col-md-4 doctor-card">
+                        <div class="card mb-3">
+                            {% if doctor.profile_image %}
+                            <img src="{{ doctor.profile_image.url }}" class="card-img-top" alt="{{ doctor.name }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ doctor.name }}</h5>
+                                <p class="card-text">{{ doctor.specialty }}</p>
+                                <a href="{% url 'book_appointment' doctor.id %}" class="btn btn-primary">Book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Pharmacies</h3>
+                        {% for pharmacy in hospital.pharmacies.all %}
+                        <div class="card mb-3 pharmacy-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ pharmacy.pharmacy_name }}</h5>
+                                <p class="card-text">
+                                    <strong>Phone:</strong> {{ pharmacy.phone }}<br>
+                                    <strong>Email:</strong> {{ pharmacy.email }}<br>
+                                    <strong>Address:</strong> {{ pharmacy.address }}
+                                </p>
+                                <a href="{% url 'order_medicine' pharmacy.id %}" class="btn btn-primary">Order Medicine</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3>Laboratories</h3>
+                        {% if hospital.laboratory %}
+                        <div class="card mb-3 laboratory-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ hospital.laboratory.lab_name }}</h5>
+                                <p class="card-text">
+                                    <strong>Phone:</strong> {{ hospital.laboratory.phone }}<br>
+                                    <strong>Email:</strong> {{ hospital.laboratory.email }}<br>
+                                    <strong>Address:</strong> {{ hospital.laboratory.address }}
+                                </p>
+                                <a href="{% url 'request_sample_collection' hospital.laboratory.id %}" class="btn btn-primary">Request Sample Collection</a>
+                                <a href="{% url 'view_test_reports' hospital.laboratory.id %}" class="btn btn-secondary">View Test Reports</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <a href="{% url 'hospital_available' %}" class="btn btn-primary mt-3">Back to Hospitals</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
